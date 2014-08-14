@@ -1,3 +1,8 @@
+<%= "こんにちは！#{current_user.name}さん" %>
+
+
+<p class="alert"><%= alert %></p>
+
 <h1>Listing tasks</h1>
 
 <table>
@@ -33,3 +38,6 @@
 <br>
 
 <%= link_to 'New Task', new_task_path %>
+
+
+<p><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></p>
