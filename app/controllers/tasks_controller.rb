@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  rescue_from Pundit::NotAuthorizedError, :with => :record_not_found
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   # GET /tasks
@@ -10,6 +11,7 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.json
   def show
+    authorize @task
   end
 
   # GET /tasks/new
@@ -19,6 +21,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
+    authorize @task
   end
 
   # POST /tasks
@@ -70,5 +73,9 @@ class TasksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
       params.require(:task).permit(:title, :description, :due_date, :status, :created_user_id, :assigned_user_id)
+    end
+
+    def record_not_found
+      redirect_to tasks_url, :alert => "Couldn't find task"
     end
 end
