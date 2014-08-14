@@ -22,12 +22,12 @@
 
 <p>
   <strong>Created user:</strong>
-  <%= @task.created_user_id %>
+  <%= @task.created_user.name %>
 </p>
 
 <p>
   <strong>Assigned user:</strong>
-  <%= @task.assigned_user_id %>
+  <%= @task.assigned_user.name %>
 </p>
 
 <%= link_to 'Edit', edit_task_path(@task) %> |

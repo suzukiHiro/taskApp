@@ -16,7 +16,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/new
   def new
-    @task = Task.new
+    @task = Task.new(:created_user_id => current_user.id)
   end
 
   # GET /tasks/1/edit

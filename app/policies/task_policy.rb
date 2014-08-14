@@ -28,6 +28,9 @@ class TaskPolicy < Struct.new(:user, :task)
 		allow_owner_admin
 	end
 
+	def owned?
+		task.created_user_id === user.id
+	end
 
 	private
 		def is_admin

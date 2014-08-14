@@ -19,6 +19,8 @@
     <%= f.label :description %><br>
     <%= f.text_area :description %>
   </div>
+
+  <% if policy(@task).edit? %>
   <div class="field">
     <%= f.label :due_date %><br>
     <%= f.datetime_select :due_date %>
@@ -28,10 +30,13 @@
     <%= f.select :status, Task::STATUS_OPTIONS %>
   </div>
   <div class="field">
-    <%= f.label :assigned_user_id %><br>
-    <%= f.number_field :assigned_user_id %>
+    <%= f.label :assigned_user_id %>
+    <%= f.collection_select :assigned_user_id, User.all, :id, :name %>
   </div>
+  <% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
+
 <% end %>
