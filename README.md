@@ -85,4 +85,16 @@ class TaskPolicy < Struct.new(:user, :task)
 end
 ```
 
+権限エラーの際に、リダイレクト設定。
+
+```
+# app/controllers/tasks_controllers.rb
+
+rescue_from Pundit::NotAuthorizedError, :with => :record_not_found
+
+def record_not_found
+	redirect_to tasks_url, :alert => "Couldn't find task"
+end
+```
+
 以上。またの。
