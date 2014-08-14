@@ -21,7 +21,7 @@ $ rails generate pundit:install
 ```
 
 ## 実装
-blogのCRUDに対して、制限をかけていきます。
+taskのCRUDに対して、制限をかけていきます。
 まずは、PunditをIncludeします。
 
 ```
@@ -29,17 +29,17 @@ class ApplicationController < ActionController::Base
 	include Pundit
 ```
 
-blog_policyクラスを作成。
+task_policyクラスを作成。
 
 ```
-rails generate pundit:policy blog
-  create  app/policies/blog_policy.rb
+rails generate pundit:policy task
+  create  app/policies/task_policy.rb
 ```
 
 そして、制限をかけたいアクションに対して、Pundit#authorize関数にオブジェクトとクエリ（省略可）をわたします。
 
 ```
-# app/controllers/blogs_controller.rb
+# app/controllers/tasks_controller.rb
 
 def show
 	authorize @task
@@ -72,9 +72,9 @@ end
 ブログの所有者のみ閲覧可能にしてみると、こんな感じです。
 
 ```
-# app/policies/blog_policy.rb
+# app/policies/task_policy.rb
 
-class BostPolicy < Struct.new(:user, :post)
+class TaskPolicy < Struct.new(:user, :post)
   def owned
     bost.user_id == user.id
   end
