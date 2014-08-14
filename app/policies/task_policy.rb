@@ -1,19 +1,19 @@
 class TaskPolicy < Struct.new(:user, :task)
 
 	def index?
-		true
+		allow_all
 	end
 
 	def show?
-		true
+		allow_all
 	end
 
 	def create?
-		true
+		allow_all
 	end
 
 	def new?
-		true
+		allow_all
 	end
 
 	def update?
@@ -36,6 +36,10 @@ class TaskPolicy < Struct.new(:user, :task)
 
 		def owned
 			task.created_user_id === user.id
+		end
+
+		def allow_all
+			true
 		end
 
 		def allow_owner_admin

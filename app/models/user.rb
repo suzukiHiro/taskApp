@@ -4,4 +4,6 @@ class User < ActiveRecord::Base
 	# :confirmable, :lockable, :timeoutable and :omniauthable
 	devise :database_authenticatable, :registerable,
 			 :recoverable, :rememberable, :trackable, :validatable
+
+	STATUS_OPTIONS = ["gen", "admin"].freeze
 end
