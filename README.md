@@ -69,14 +69,14 @@ end
 アクセスしているアクションに対して制限をかけるか、クエリを指定して制限をかけるかになっています。
 
 アクション名＋'?'のPolicyメソッドが呼ばれるので、ここで制限をかけます。
-ブログの所有者のみ閲覧可能にしてみると、こんな感じです。
+タスクの作成者のみ閲覧可能にしてみると、こんな感じです。
 
 ```
 # app/policies/task_policy.rb
 
-class TaskPolicy < Struct.new(:user, :post)
+class TaskPolicy < Struct.new(:user, :task)
   def owned
-    bost.user_id == user.id
+    task.created_user_id == user.id
   end
 
   def show?
