@@ -25,11 +25,7 @@
   </div>
   <div class="field">
     <%= f.label :status %><br>
-    <%= f.text_field :status %>
-  </div>
-  <div class="field">
-    <%= f.label :created_user_id %><br>
-    <%= f.number_field :created_user_id %>
+    <%= f.select :status, Task::STATUS_OPTIONS %>
   </div>
   <div class="field">
     <%= f.label :assigned_user_id %><br>
