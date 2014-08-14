@@ -1,14 +1,7 @@
 class TaskPolicy < Struct.new(:user, :task)
-	def owned
-		if task.created_user_id === user.id then
-			return true
-		else
-			return false
-		end
-	end
 
 	def index?
-		false
+		true
 	end
 
 	def show?
@@ -16,7 +9,7 @@ class TaskPolicy < Struct.new(:user, :task)
 	end
 
 	def create?
-		new?
+		true
 	end
 
 	def new?
@@ -24,14 +17,36 @@ class TaskPolicy < Struct.new(:user, :task)
 	end
 
 	def update?
-		edit?
+		allow_owner_admin
 	end
 
 	def edit?
-		task.created_user_id === user.id
+		allow_owner_admin
 	end
 
 	def destroy?
-		owned
+		allow_owner_admin
 	end
+
+
+	private
+		def is_admin
+			user.role === "admin"
+		end
+
+		def owned
+			task.created_user_id === user.id
+		end
+
+		def allow_owner_admin
+			if owned or is_admin
+				true
+			end
+		end
+
+		def allow_admin
+			if is_admin
+				true
+			end
+		end
 end
