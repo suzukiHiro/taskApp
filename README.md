@@ -170,7 +170,7 @@ member_session
 
 # deviseで登録フォームの項目を追加する
 
-## devise のジェネレータでビューをコピー生成
+### devise のジェネレータでビューをコピー生成
 
 まず、Devise の gem で管理されているデフォルトのビューを、app/views/users 内にコピー生成する。
 
@@ -192,7 +192,7 @@ railsapp/
 
 中身は以上のような感じ。Devise で管理されるビューをカスタマイズする場合は、この app/views/users を編集します。
 
-## 個別のビューをカスタマイズする場合
+### 個別のビューをカスタマイズする場合
 
 ```ruby
 # config/initializers/devise.rb
@@ -228,7 +228,7 @@ config.scoped_views = true
 <%= render "users/shared/links" %>
 ```
 
-## name フィールドを許可する strong parameters の設定
+### name フィールドを許可する strong parameters の設定
 
 ``` ruby
 # app/controllers/application_controller.rb
@@ -243,7 +243,7 @@ class ApplicationController < ActionController::Base
 end
 ```
 
-## User モデルでの validation
+### User モデルでの validation
 
 ``` ruby
 # app/models/user.rb
