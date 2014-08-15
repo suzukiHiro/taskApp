@@ -1,0 +1,20 @@
+<div class="navbar metro" id="nav1">
+	<div class="row">
+	<!-- Toggle for mobile navigation, targeting the <ul> -->
+	<a class="toggle" gumby-trigger="#nav1 > ul" href="#"><i class="icon-menu"></i></a>
+	<h2 class="four columns logo">TaskApp</h2>
+	<nav class="pull_right">
+		<% if user_signed_in? %>
+		<ul class="eight columns ten">
+			<li><%= link_to "#{current_user.name}", tasks_path %></li>
+			<li><%= link_to('ログアウト', destroy_user_session_path, :method => :delete) %></li>
+		</ul>
+		<% else %>
+		<ul class="eight columns ten">
+			<li><%= link_to "新規登録", new_user_registration_path %></li>
+			<li><%= link_to "ログイン", new_user_session_path %></li>
+		</ul>
+		<% end %>
+	</nav>
+	</div>
+</div>

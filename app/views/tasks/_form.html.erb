@@ -1,42 +1,35 @@
-<%= form_for(@task) do |f| %>
-  <% if @task.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+<div class="field">
 
-      <ul>
-      <% @task.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+  <%= form_for(@task) do |f| %>
+    <% if @task.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+  
+        <ul>
+        <% @task.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+      <%= f.label :title %>
+      <%= f.text_field :title, :class => "input" %>
+
+      <%= f.label :description %>
+      <%= f.text_area :description, :class => "input" %>
+  
+    <% if policy(@task).edit? %>
+      <%= f.label :due_date %>
+      <%= f.datetime_select :due_date %>
+
+      <%= f.label :status %>
+      <%= f.select :status, Task::STATUS_OPTIONS %>
+
+      <%= f.label :assigned_user_id %>
+      <%= f.collection_select :assigned_user_id, User.all, :id, :name %>
+    <% end %>
+  
+    <div class="medium info btn pull_right"><%= f.submit "　登録　" %></div>
+  
   <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-
-  <% if policy(@task).edit? %>
-  <div class="field">
-    <%= f.label :due_date %><br>
-    <%= f.datetime_select :due_date %>
-  </div>
-  <div class="field">
-    <%= f.label :status %><br>
-    <%= f.select :status, Task::STATUS_OPTIONS %>
-  </div>
-  <div class="field">
-    <%= f.label :assigned_user_id %>
-    <%= f.collection_select :assigned_user_id, User.all, :id, :name %>
-  </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-
-<% end %>

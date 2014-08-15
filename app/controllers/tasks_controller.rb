@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   rescue_from Pundit::NotAuthorizedError, :with => :record_not_found
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /tasks
   # GET /tasks.json

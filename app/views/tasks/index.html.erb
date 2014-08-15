@@ -1,17 +1,12 @@
-<%= "こんにちは！#{current_user.name}さん" %>
-
-
 <p class="alert"><%= alert %></p>
 
-<h1>Listing tasks</h1>
+<h5>タスク一覧</h5>
 
 <table>
   <thead>
     <tr>
       <th>Title</th>
-      <th>Description</th>
       <th>Due date</th>
-      <th>Status</th>
       <th>Created user</th>
       <th>Assigned user</th>
       <th colspan="3"></th>
@@ -21,23 +16,20 @@
   <tbody>
     <% @tasks.each do |task| %>
       <tr>
-        <td><%= task.title %></td>
-        <td><%= task.description %></td>
+        <td><li class="danger label"><%= task.status %></li>　<%= task.title %></td>
         <td><%= task.due_date %></td>
-        <td><%= task.status %></td>
         <td><%= task.created_user.name %></td>
         <td><%= task.assigned_user.name %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to "show", task %></td>
+        
+        <td><%= link_to "Edit", edit_task_path(task) if policy(task).edit? %></td>
+        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } if policy(task).destroy? %></td>
+
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Task', new_task_path %>
-
-
-<p><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></p>
+<div class="medium primary btn pull_right">
+  <%= link_to 'New Task', new_task_path %>
+</div>
